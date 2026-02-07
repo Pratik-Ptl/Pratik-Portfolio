@@ -18,6 +18,9 @@
   --radius: 22px;
 }
 
+/* Smooth anchor jumps */
+html { scroll-behavior: smooth; }
+
 .page{
   min-height: 100vh;
   width: 100%;
@@ -76,7 +79,7 @@ a:hover{ opacity: 0.94; }
   padding: 22px 0 10px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* fixes pill being “in the middle” */
+  align-items: flex-start;
   gap: 10px;
 }
 
@@ -151,6 +154,7 @@ a:hover{ opacity: 0.94; }
   padding: 18px;
   box-shadow: 0 16px 46px rgba(0,0,0,0.22);
   transition: transform 160ms ease, border-color 160ms ease;
+  scroll-margin-top: 90px; /* avoids sticky header overlap */
 }
 
 .card:hover{
@@ -178,11 +182,6 @@ a:hover{ opacity: 0.94; }
   margin-top: 10px;
 }
 
-@media (max-width: 900px){
-  .grid{ grid-template-columns: 1fr; }
-  .hero h1{ font-size: 38px; }
-}
-
 .grid h3{
   margin: 0 0 6px;
   font-size: 12px;
@@ -205,10 +204,6 @@ a:hover{ opacity: 0.94; }
   margin-top: 10px;
 }
 
-@media (max-width: 900px){
-  .projGrid{ grid-template-columns: 1fr; }
-}
-
 .proj{
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -220,6 +215,46 @@ a:hover{ opacity: 0.94; }
 .proj:hover{
   transform: translateY(-2px);
   border-color: rgba(110,168,255,0.24);
+}
+
+.projTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.proj h3{
+  margin: 0;
+  font-size: 15px;
+}
+
+.proj p{
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.projLinks{
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.chipLink{
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: var(--text);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.chipLink:hover{
+  border-color: rgba(110,168,255,0.30);
+  transform: translateY(-1px);
 }
 
 .tags{
@@ -238,6 +273,64 @@ a:hover{ opacity: 0.94; }
   background: rgba(255,255,255,0.02);
 }
 
+/* CONTACT */
+.contactRow{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.contactItem{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  padding: 10px 12px;
+  border-radius: 14px;
+  color: var(--text);
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.contactItem:hover{
+  transform: translateY(-1px);
+  border-color: rgba(110,168,255,0.30);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .grid{ grid-template-columns: 1fr; }
+  .projGrid{ grid-template-columns: 1fr; }
+  .hero h1{ font-size: 38px; }
+}
+
+/* ✅ CLICK NAV → GLOW THEN FADE OUT (pure CSS) */
+.card:target{
+  animation: sectionGlowFade 2.8s ease-out;
+}
+
+@keyframes sectionGlowFade {
+  0%{
+    filter: brightness(1);
+  }
+  18%{
+    border-color: rgba(110,168,255,0.62);
+    box-shadow:
+      0 0 0 6px rgba(110,168,255,0.16),
+      0 0 56px rgba(110,168,255,0.26),
+      var(--shadow);
+    background:
+      linear-gradient(180deg, rgba(110,168,255,0.14), rgba(255,255,255,0.03));
+    transform: translateY(-2px);
+    filter: brightness(1.10);
+  }
+  100%{
+    border-color: var(--border);
+    box-shadow: 0 16px 46px rgba(0,0,0,0.22);
+    background: linear-gradient(180deg, var(--card), var(--card2));
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+}
+
 .footer{
   margin-top: 18px;
   text-align:center;
@@ -245,31 +338,3 @@ a:hover{ opacity: 0.94; }
   font-size: 12px;
   padding: 10px 0;
 }
-
-/* Smooth anchor jumps (optional if you already have it elsewhere) */
-html { scroll-behavior: smooth; }
-
-/* So sticky header doesn't cover the section title */
-.card { scroll-margin-top: 90px; }
-
-/* Highlight the section you navigated to */
-.card:target{
-  border-color: rgba(110,168,255,0.45);
-  box-shadow:
-    0 0 0 3px rgba(110,168,255,0.14),
-    0 18px 60px rgba(0,0,0,0.45);
-  background: linear-gradient(
-    180deg,
-    rgba(110,168,255,0.10),
-    rgba(255,255,255,0.03)
-  );
-  animation: targetPulse 900ms ease-out;
-}
-
-/* Subtle pulse animation */
-@keyframes targetPulse{
-  0%   { transform: translateY(0); filter: brightness(1); }
-  40%  { transform: translateY(-2px); filter: brightness(1.06); }
-  100% { transform: translateY(0); filter: brightness(1); }
-}
-
