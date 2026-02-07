@@ -22,7 +22,8 @@ export default function App() {
             Hi, I’m <span className="accent">Pratik Patel</span>
           </h1>
           <p className="sub">
-            Computer Science student focused on React, APIs, and building clean projects recruiters can click.
+            Computer Science student building clean, practical projects with React, APIs, and SQL — deployed so recruiters can
+            click and see.
           </p>
 
           <div className="btnRow">
@@ -41,8 +42,8 @@ export default function App() {
         <section id="about" className="card">
           <h2>About</h2>
           <p>
-            I’m a Computer Science student who enjoys building practical projects. I’m currently improving my React skills,
-            learning APIs, and polishing live demos for internships and co-ops.
+            I’m a CS student focused on turning ideas into polished demos. Right now I’m improving my React skills, learning
+            APIs, and building projects for co-op / internship applications.
           </p>
         </section>
 
@@ -58,7 +59,7 @@ export default function App() {
               <p>Git/GitHub, VS Code, Linux, MySQL</p>
             </div>
             <div>
-              <h3>Currently learning</h3>
+              <h3>Learning</h3>
               <p>React, REST APIs, deployment</p>
             </div>
           </div>
@@ -69,11 +70,14 @@ export default function App() {
           <div className="projGrid">
             <div className="proj">
               <h3>Portfolio Website</h3>
-              <p>React + Vite portfolio deployed on GitHub Pages.</p>
+              <p>React + Vite portfolio deployed with GitHub Pages.</p>
               <div className="tags">
-                <span>React</span><span>Vite</span><span>Pages</span>
+                <span>React</span>
+                <span>Vite</span>
+                <span>GitHub Pages</span>
               </div>
             </div>
+
             <div className="proj">
               <h3>Next Project</h3>
               <p>Job tracker / recipe app remake / study planner (coming soon).</p>
