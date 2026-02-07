@@ -245,3 +245,31 @@ a:hover{ opacity: 0.94; }
   font-size: 12px;
   padding: 10px 0;
 }
+
+/* Smooth anchor jumps (optional if you already have it elsewhere) */
+html { scroll-behavior: smooth; }
+
+/* So sticky header doesn't cover the section title */
+.card { scroll-margin-top: 90px; }
+
+/* Highlight the section you navigated to */
+.card:target{
+  border-color: rgba(110,168,255,0.45);
+  box-shadow:
+    0 0 0 3px rgba(110,168,255,0.14),
+    0 18px 60px rgba(0,0,0,0.45);
+  background: linear-gradient(
+    180deg,
+    rgba(110,168,255,0.10),
+    rgba(255,255,255,0.03)
+  );
+  animation: targetPulse 900ms ease-out;
+}
+
+/* Subtle pulse animation */
+@keyframes targetPulse{
+  0%   { transform: translateY(0); filter: brightness(1); }
+  40%  { transform: translateY(-2px); filter: brightness(1.06); }
+  100% { transform: translateY(0); filter: brightness(1); }
+}
+
