@@ -87,14 +87,38 @@ export default function App() {
 
             <article className="proj">
               <div className="projTop">
-                <h3>Next Project</h3>
+                <h3>SubTrack — Subscription Tracker</h3>
                 <div className="projLinks">
-                  <a className="chipLink" href="#" target="_blank" rel="noreferrer">Coming soon</a>
+                  <a
+                    className="chipLink"
+                    href="https://subscription-tracker-delta-virid.vercel.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Live Demo
+                  </a>
+                  <a
+                    className="chipLink"
+                    href="https://github.com/Pratik-Ptl/Subscription-Tracker"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub
+                  </a>
                 </div>
               </div>
-              <p>(coming soon).</p>
+            
+              <p>
+                Track subscriptions with due dates, monthly/yearly spend estimates, CSV export, guest mode,
+                and cloud sync using Supabase authentication + database.
+              </p>
+            
               <div className="tags">
-                <span>Planned</span>
+                <span>React</span>
+                <span>Vite</span>
+                <span>Tailwind</span>
+                <span>Supabase</span>
+                <span>Vercel</span>
               </div>
             </article>
           </div>
