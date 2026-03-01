@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:hamzanaseem.vercel.app)",
+      "Bash(curl -s https://hamzanaseem.vercel.app)",
+      "Bash(curl -s \"https://hamzanaseem.vercel.app/_next/static/css/b918e7d29cad3ed3.css\")",
+      "Bash(tr '{' '\\\\n')",
+      "Bash(python3 -c \":*)",
+      "Bash(python3:*)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --screenshot=\"/Users/pratikpatel/Desktop/Pratik-Portfolio-hamza-style-v3-cursor-navfix/public/portfolio-preview.jpg\" --window-size=1280,720 --hide-scrollbars --disable-gpu \"http://localhost:5173/Pratik-Portfolio/\")",
+      "Bash(osascript -e ':*)",
+      "Bash(npm run build)",
+      "Bash(npm run deploy)",
+      "Bash(git -C /Users/pratikpatel/Desktop/Pratik-Portfolio-hamza-style-v3-cursor-navfix/ remote -v)",
+      "Bash(gh repo view pratikpatel/Pratik-Portfolio)",
+      "Bash(gh repo view Pratik-Portfolio)",
+      "mcp__d566e2e4-04b7-4d67-a1ff-4afb19b0b8ee__deploy_to_vercel",
+      "Bash(npx vercel --version)",
+      "Bash(npx vercel whoami)",
+      "Bash(git config --global user.name)",
+      "Bash(git config --global user.email)",
+      "Bash(git config --global --list)",
+      "Bash(git init)",
+      "Bash(git checkout -b main)",
+      "Bash(git add .)",
+      "Bash(git commit -m \"Initial commit — Pratik Portfolio\")"
+    ]
+  }
+}
