@@ -477,7 +477,7 @@ function IntroScreen({ onDone }) {
     };
   }, []);
 
-  const name = "Pratik Patel";
+  const name = "Pratik      Patel";
 
   return (
     <div className={`introScreen${phase === "out" ? " isOut" : ""}`} aria-label="Loading portfolio">
