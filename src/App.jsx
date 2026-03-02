@@ -249,8 +249,8 @@ function CursorFx({ activeSection }) {
     let lastSpawnX = tx, lastSpawnY = ty;
     let particleCount = 0;
     const MAX_PARTICLES = 20;
-    const SPAWN_DIST_SQ = 64; // 8px squared
-    const PARTICLE_LIFE = 600;
+    const SPAWN_DIST_SQ = 100; // 10px squared
+    const PARTICLE_LIFE = 480;
 
     const spawnParticle = (x, y, vx, vy) => {
       if (particleCount >= MAX_PARTICLES) return;
@@ -259,21 +259,26 @@ function CursorFx({ activeSection }) {
 
       const p = document.createElement("div");
       p.className = "cursorParticle";
-      const color = ACCENT_COLORS[Math.floor(Math.random() * 3)];
-      // Stardust streak: thin line (width 8-18px, height 1.5-2.5px) rotated to movement direction
-      const len = 8 + Math.random() * 10;
-      const thick = 1.5 + Math.random();
-      const angle = Math.atan2(vy, vx) * (180 / Math.PI) + (Math.random() - 0.5) * 30;
-      p.style.cssText = `left:0;top:0;width:${len}px;height:${thick}px;background:${color};opacity:0.78;border-radius:${thick}px;box-shadow:0 0 4px ${color};transform:translate3d(${x}px,${y}px,0) translate(-50%,-50%) rotate(${angle}deg)`;
+      const color = ACCENT_COLORS[Math.floor(Math.random() * ACCENT_COLORS.length)];
+      // Shooting star: gradient tail (transparent) → bright head (accent + white tip)
+      const len   = 22 + Math.random() * 20;
+      const thick = 1.5 + Math.random() * 0.8;
+      const angle    = Math.atan2(vy, vx) * (180 / Math.PI) + (Math.random() - 0.5) * 25;
+      const angleRad = angle * Math.PI / 180;
+      p.style.cssText = `left:0;top:0;width:${len}px;height:${thick}px;`
+        + `background:linear-gradient(to right,transparent 0%,${color}55 30%,${color} 80%,#ffffff 100%);`
+        + `opacity:0.9;border-radius:999px;`
+        + `box-shadow:0 0 5px 1px ${color}99,0 0 2px #ffffff66;`
+        + `transform:translate3d(${x}px,${y}px,0) translate(-50%,-50%) rotate(${angle}deg)`;
       container.appendChild(p);
       particleCount++;
 
       requestAnimationFrame(() => {
-        const drift = 6 + Math.random() * 10;
-        const driftX = Math.cos(angle * Math.PI / 180) * -drift;
-        const driftY = Math.sin(angle * Math.PI / 180) * -drift;
-        p.style.transition = `transform ${PARTICLE_LIFE}ms cubic-bezier(.2,.8,.3,1), opacity ${PARTICLE_LIFE}ms cubic-bezier(.3,0,1,1)`;
-        p.style.transform = `translate3d(${x + driftX}px,${y + driftY}px,0) translate(-50%,-50%) rotate(${angle}deg) scaleX(0.15)`;
+        const shoot = 18 + Math.random() * 18;
+        const ex = x + Math.cos(angleRad) * shoot;
+        const ey = y + Math.sin(angleRad) * shoot;
+        p.style.transition = `transform ${PARTICLE_LIFE}ms cubic-bezier(.1,.5,.2,1), opacity ${Math.round(PARTICLE_LIFE * 0.6)}ms ease-out`;
+        p.style.transform = `translate3d(${ex}px,${ey}px,0) translate(-50%,-50%) rotate(${angle}deg) scaleX(0.2)`;
         p.style.opacity = "0";
       });
 
