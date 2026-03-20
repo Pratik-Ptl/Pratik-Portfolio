@@ -1,14 +1,739 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Pratik Patel — Portfolio" />
-    <title>Pratik Patel — Portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalanium — Where Every Skill Finds Its Purpose</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --clay: #C4714A;
+    --terracotta: #A85535;
+    --sand: #E8D5B7;
+    --cream: #F5EFE4;
+    --bark: #3D2B1F;
+    --ash: #6B5A4E;
+    --gold: #C9964A;
+    --moss: #7A8C5E;
+    --white: #FDFAF6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--bark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(253,250,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,113,74,0.15);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600;
+    color: var(--bark); letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 400; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ash);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--clay); }
+  .nav-cta {
+    background: var(--bark); color: var(--cream);
+    padding: 0.6rem 1.5rem; border-radius: 2px;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--clay); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px; overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 4rem;
+  }
+  .hero-tag {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--clay);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--bark); margin-bottom: 1.8rem;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--clay);
+  }
+  .hero-sub {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: var(--ash); max-width: 420px; margin-bottom: 3rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--clay); color: var(--white);
+    padding: 0.9rem 2.2rem; border-radius: 2px;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--terracotta); transform: translateY(-1px); }
+  .btn-ghost {
+    color: var(--bark); font-size: 0.85rem; font-weight: 400;
+    letter-spacing: 0.05em; text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: gap 0.3s;
+  }
+  .btn-ghost:hover { gap: 0.8rem; }
+  .hero-right {
+    background: var(--bark);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-art {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(196,113,74,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(201,150,74,0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(122,140,94,0.15) 0%, transparent 40%);
+  }
+  .hero-circle {
+    width: 340px; height: 340px;
+    border: 1px solid rgba(196,113,74,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+    animation: rotate 20s linear infinite;
+  }
+  .hero-circle::before {
+    content: '';
+    position: absolute; inset: 20px;
+    border: 1px solid rgba(201,150,74,0.2);
+    border-radius: 50%;
+  }
+  .hero-circle-inner {
+    width: 200px; height: 200px;
+    background: rgba(196,113,74,0.1);
+    border-radius: 50%;
+    border: 1px solid rgba(196,113,74,0.4);
+    display: flex; align-items: center; justify-content: center;
+    animation: rotate 20s linear infinite reverse;
+  }
+  .hero-k {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 300;
+    color: rgba(232,213,183,0.8);
+    font-style: italic;
+  }
+  .hero-dots {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .dot {
+    position: absolute; width: 3px; height: 3px;
+    background: var(--clay); border-radius: 50%; opacity: 0.4;
+  }
+  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(232,213,183,0.5);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .scroll-line {
+    width: 1px; height: 40px; background: rgba(196,113,74,0.4);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(0.6)} }
+
+  /* SECTION BASE */
+  section { padding: 7rem 4rem; }
+  .section-tag {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-tag::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--clay);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 3.5vw, 3.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--bark); margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--clay); }
+
+  /* ABOUT */
+  #about { background: var(--cream); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center; max-width: 1200px; margin: 0 auto;
+  }
+  .about-text p {
+    font-size: 1rem; font-weight: 300; line-height: 1.9;
+    color: var(--ash); margin-bottom: 1.2rem;
+  }
+  .about-text p strong { color: var(--bark); font-weight: 500; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  }
+  .stat {
+    padding: 1.8rem; background: var(--white);
+    border: 1px solid rgba(196,113,74,0.15);
+    border-radius: 4px;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--clay);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.8rem; font-weight: 400; color: var(--ash);
+    margin-top: 0.4rem; letter-spacing: 0.05em;
+  }
+
+  /* SERVICES */
+  #services { background: var(--white); }
+  .services-intro {
+    max-width: 600px; margin-bottom: 4rem;
+  }
+  .services-intro p {
+    font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--ash);
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(196,113,74,0.15);
+    border: 1px solid rgba(196,113,74,0.15);
+    max-width: 1200px;
+  }
+  .service-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--cream); }
+  .service-icon {
+    width: 40px; height: 40px; margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .service-icon svg { width: 28px; height: 28px; stroke: var(--clay); fill: none; stroke-width: 1.5; }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; color: var(--bark);
+    margin-bottom: 0.8rem;
+  }
+  .service-desc {
+    font-size: 0.88rem; font-weight: 300; line-height: 1.7; color: var(--ash);
+  }
+
+  /* TALENT */
+  #talent { background: var(--bark); }
+  #talent .section-tag { color: var(--gold); }
+  #talent .section-tag::before { background: var(--gold); }
+  #talent .section-title { color: var(--sand); }
+  #talent .section-title em { color: var(--gold); }
+  .talent-sub {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: rgba(232,213,183,0.6); max-width: 500px; margin-bottom: 3.5rem;
+  }
+  .talent-roles {
+    display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 4rem;
+  }
+  .role-pill {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid rgba(196,113,74,0.3);
+    border-radius: 100px;
+    font-size: 0.82rem; font-weight: 300; color: var(--sand);
+    letter-spacing: 0.04em;
+    transition: all 0.3s; cursor: default;
+  }
+  .role-pill:hover {
+    background: rgba(196,113,74,0.15);
+    border-color: var(--clay);
+    color: var(--gold);
+  }
+  .talent-cta-block {
+    background: rgba(196,113,74,0.1);
+    border: 1px solid rgba(196,113,74,0.25);
+    border-radius: 4px;
+    padding: 3rem; max-width: 600px;
+  }
+  .talent-cta-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; color: var(--sand);
+    margin-bottom: 1rem;
+  }
+  .talent-cta-block p {
+    font-size: 0.9rem; font-weight: 300; line-height: 1.8;
+    color: rgba(232,213,183,0.6); margin-bottom: 2rem;
+  }
+  .btn-gold {
+    background: var(--gold); color: var(--bark);
+    padding: 0.9rem 2.2rem; border-radius: 2px;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    display: inline-block; transition: all 0.3s;
+  }
+  .btn-gold:hover { background: var(--clay); color: var(--white); }
+
+  /* PORTFOLIO */
+  #portfolio { background: var(--cream); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem; max-width: 1200px;
+    margin-top: 3rem;
+  }
+  .port-card {
+    background: var(--bark);
+    border-radius: 4px; overflow: hidden;
+    position: relative; min-height: 220px;
+    display: flex; align-items: flex-end;
+    padding: 1.5rem;
+    transition: transform 0.3s;
+  }
+  .port-card:hover { transform: translateY(-3px); }
+  .port-card:first-child { grid-row: span 2; min-height: 460px; }
+  .port-bg {
+    position: absolute; inset: 0;
+    opacity: 0.4;
+  }
+  .port-bg-1 { background: linear-gradient(135deg, #C4714A, #3D2B1F); }
+  .port-bg-2 { background: linear-gradient(135deg, #7A8C5E, #3D2B1F); }
+  .port-bg-3 { background: linear-gradient(135deg, #C9964A, #3D2B1F); }
+  .port-bg-4 { background: linear-gradient(135deg, #A85535, #3D2B1F); }
+  .port-bg-5 { background: linear-gradient(135deg, #6B5A4E, #3D2B1F); }
+  .port-info { position: relative; z-index: 1; }
+  .port-cat {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .port-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; color: var(--sand);
+  }
+  .port-coming {
+    position: absolute; top: 1rem; right: 1rem;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(232,213,183,0.4); z-index: 1;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--white); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; max-width: 1200px; margin: 0 auto; align-items: start;
+  }
+  .contact-info p {
+    font-size: 1rem; font-weight: 300; line-height: 1.9;
+    color: var(--ash); margin-bottom: 2.5rem;
+  }
+  .contact-detail {
+    display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.9rem; color: var(--ash);
+  }
+  .contact-item strong { color: var(--bark); font-weight: 500; min-width: 60px; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ash);
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--cream);
+    border: 1px solid rgba(196,113,74,0.2);
+    border-radius: 2px;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 300; color: var(--bark);
+    outline: none; transition: border-color 0.3s;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--clay);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    background: var(--clay); color: var(--white);
+    padding: 1rem 2.5rem; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.3s; align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--terracotta); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bark);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; color: var(--sand);
+  }
+  .footer-logo span { color: var(--clay); }
+  .footer-tagline {
+    font-size: 0.78rem; font-weight: 300; color: rgba(232,213,183,0.4);
+    letter-spacing: 0.08em; margin-top: 0.2rem;
+  }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-size: 0.78rem; color: rgba(232,213,183,0.5);
+    text-decoration: none; letter-spacing: 0.06em;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy {
+    font-size: 0.72rem; color: rgba(232,213,183,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(196,113,74,0.3), transparent);
+    margin: 0;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    #home { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    .hero-left { padding: 3rem 2rem; }
+    section { padding: 5rem 2rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .port-card:first-child { grid-row: span 1; grid-column: span 2; }
+    footer { flex-direction: column; padding: 2.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Kalan<span>ium</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#talent">Join</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#talent" class="nav-cta">Join the Collective</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-tag">The Element of Human Skill</div>
+    <h1 class="hero-title">
+      Where every<br><em>skill</em> finds<br>its purpose.
+    </h1>
+    <p class="hero-sub">Kalanium connects exceptional creative and technical talent with the projects that deserve them. From storytellers to developers — every craft has a place here.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Explore What We Do</a>
+      <a href="#talent" class="btn-ghost">Join as Talent →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-art"></div>
+    <div class="hero-circle">
+      <div class="hero-circle-inner">
+        <span class="hero-k">K</span>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <div class="section-tag">About Kalanium</div>
+      <h2 class="section-title">Built on the belief that <em>talent is the rarest element.</em></h2>
+      <p>Kalanium was born from a simple observation — the world is full of extraordinary people doing remarkable things, but finding the right talent for the right project remains surprisingly hard.</p>
+      <p>We built a platform where <strong>creators, makers, builders and thinkers</strong> connect with the work that truly fits them. Not just a marketplace — a collective with purpose.</p>
+      <p>The name itself says it all. <strong>Kala</strong> — the Gujarati word for art and skill — fused with <strong>-ium</strong>, the suffix of elements. Because human skill is elemental. It powers everything.</p>
+    </div>
+    <div class="about-stats fade-up">
+      <div class="stat">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Creative disciplines</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Possibilities per project</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Platform for all talent</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Barriers to great work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-intro fade-up">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Every skill. <em>One platform.</em></h2>
+    <p>We connect businesses and individuals with the exact talent they need — across every creative and technical discipline imaginable.</p>
+  </div>
+  <div class="services-grid fade-up">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      </div>
+      <div class="service-name">Creators & Influencers</div>
+      <div class="service-desc">Social media creators and influencers who know how to build audiences and make content that actually resonates.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M20.188 10.934l-1.12-.208a8.003 8.003 0 0 0-.23-.556l.648-.88a.75.75 0 0 0-.08-.978l-1.716-1.716a.75.75 0 0 0-.978-.08l-.88.648a8.003 8.003 0 0 0-.556-.23l-.208-1.12A.75.75 0 0 0 14.325 5h-2.65a.75.75 0 0 0-.743.646l-.208 1.12a8.003 8.003 0 0 0-.556.23l-.88-.648a.75.75 0 0 0-.978.08L6.594 8.144a.75.75 0 0 0-.08.978l.648.88a8.003 8.003 0 0 0-.23.556l-1.12.208A.75.75 0 0 0 5.25 11.5v2.65c0 .37.27.687.636.744l1.12.208c.072.19.15.374.23.556l-.648.88a.75.75 0 0 0 .08.978l1.716 1.716c.266.266.67.308.978.08l.88-.648c.182.08.366.158.556.23l.208 1.12c.057.366.374.636.744.636h2.65c.37 0 .687-.27.744-.636l.208-1.12c.19-.072.374-.15.556-.23l.88.648a.75.75 0 0 0 .978-.08l1.716-1.716a.75.75 0 0 0 .08-.978l-.648-.88c.08-.182.158-.366.23-.556l1.12-.208A.75.75 0 0 0 19.5 13.825v-2.65a.75.75 0 0 0-.636-.744l-.676.003z"/></svg>
+      </div>
+      <div class="service-name">Photo & Video</div>
+      <div class="service-desc">Photographers and videographers who capture stories through a lens — from brand campaigns to documentary work.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/><path d="M15 15l6 6m-3-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+      </div>
+      <div class="service-name">Editors & Motion</div>
+      <div class="service-desc">Video editors and motion designers who bring raw footage and ideas to life through pacing, sound and animation.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="service-name">Graphic Design</div>
+      <div class="service-desc">Visual thinkers who craft brands, identities, and experiences that people remember long after they've looked away.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+      </div>
+      <div class="service-name">Development</div>
+      <div class="service-desc">Front-end, back-end and full-stack developers who build the products and platforms that power modern businesses.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div class="service-name">Storytelling & Writing</div>
+      <div class="service-desc">Writers, copywriters and storytellers who give voice to brands, campaigns and ideas that need to be heard.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TALENT -->
+<section id="talent">
+  <div class="section-tag">Join the Collective</div>
+  <h2 class="section-title">Your skill is <em>elemental.</em><br>Bring it here.</h2>
+  <p class="talent-sub">Kalanium is built for people who are serious about their craft. If you're exceptional at what you do, there's a place for you in our collective.</p>
+
+  <div class="talent-roles fade-up">
+    <span class="role-pill">Social Media Creator</span>
+    <span class="role-pill">Photographer</span>
+    <span class="role-pill">Videographer</span>
+    <span class="role-pill">Video Editor</span>
+    <span class="role-pill">Motion Designer</span>
+    <span class="role-pill">Graphic Designer</span>
+    <span class="role-pill">Front-end Developer</span>
+    <span class="role-pill">Back-end Developer</span>
+    <span class="role-pill">Full Stack Developer</span>
+    <span class="role-pill">Storyteller</span>
+    <span class="role-pill">Copywriter</span>
+    <span class="role-pill">Content Strategist</span>
+  </div>
+
+  <div class="talent-cta-block fade-up">
+    <h3>Ready to join?</h3>
+    <p>We're currently building our founding collective of talent. Apply early and be part of shaping what Kalanium becomes.</p>
+    <a href="#contact" class="btn-gold">Apply as Talent</a>
+  </div>
+</section>
+
+<div class="divider" style="background: linear-gradient(to right, transparent, rgba(196,113,74,0.15), transparent);"></div>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-tag fade-up">Our Work</div>
+  <h2 class="section-title fade-up">Craft in <em>motion.</em></h2>
+
+  <div class="portfolio-grid fade-up">
+    <div class="port-card">
+      <div class="port-bg port-bg-1"></div>
+      <div class="port-info">
+        <div class="port-cat">Brand Identity</div>
+        <div class="port-name">Coming Soon</div>
+      </div>
+      <div class="port-coming">Portfolio launching</div>
+    </div>
+    <div class="port-card">
+      <div class="port-bg port-bg-2"></div>
+      <div class="port-info">
+        <div class="port-cat">Motion Design</div>
+        <div class="port-name">Coming Soon</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-bg port-bg-3"></div>
+      <div class="port-info">
+        <div class="port-cat">Development</div>
+        <div class="port-name">Coming Soon</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-bg port-bg-4"></div>
+      <div class="port-info">
+        <div class="port-cat">Photography</div>
+        <div class="port-name">Coming Soon</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-bg port-bg-5"></div>
+      <div class="port-info">
+        <div class="port-cat">Storytelling</div>
+        <div class="port-name">Coming Soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info fade-up">
+      <div class="section-tag">Get in Touch</div>
+      <h2 class="section-title">Let's build something <em>worth making.</em></h2>
+      <p>Whether you're looking to hire talent, join our collective, or just want to know more about what we're building — we'd love to hear from you.</p>
+      <div class="contact-detail">
+        <div class="contact-item">
+          <strong>Email</strong>
+          <a href="mailto:contact@kalanium.com" style="color: var(--ash); text-decoration: none;">contact@kalanium.com</a>
+        </div>
+        <div class="contact-item">
+          <strong>Based</strong>
+          <span>Regina, Saskatchewan — serving globally</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form fade-up">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Your last name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>I am a...</label>
+        <select>
+          <option value="">Select one</option>
+          <option>Client looking for talent</option>
+          <option>Creative looking to join</option>
+          <option>Developer looking to join</option>
+          <option>Just curious</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your project or yourself..."></textarea>
+      </div>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Kalan<span>ium</span></div>
+    <div class="footer-tagline">Where every skill finds its purpose.</div>
+  </div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#talent">Join</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Kalanium. All rights reserved.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
